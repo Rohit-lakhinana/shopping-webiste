@@ -1,0 +1,69 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <center>
+
+<h1> Shop Online Here</h1>
+</center>  
+    </ion-title>
+
+    <ion-button color="dark" size="small" slot="end" (click)="openCart()">
+      {{ cartItemCount | async }}
+      <ion-icon name="cart" slot="end"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    
+    <ion-card *ngFor="let item of products">
+      
+          <ion-card-header>
+            <ion-img [src]="item.imageUrl"></ion-img>
+          
+          <ion-card-title>{{item.name}} </ion-card-title>
+         
+        </ion-card-header>
+        
+        <ion-card-content>
+
+          <ion-row>
+            <ion-col size="8">
+              <ion-label color="secondary">
+                
+                <b>{{ item.price | currency: 'INR' }}</b>
+                  
+              </ion-label>
+              
+            </ion-col>
+            <ion-col size="4" class="ion-text-right">
+              
+              <ion-button color="dark" size="small" (click)="addToCart(item)">
+                
+                ADD TO CART
+                <ion-icon name="cart" slot="end"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+    </ion-card>
+  </ion-list>
+  
+ <center> <ion-footer>
+ 
+  <div class="social-links">
+    <a href="https://www.facebook.com/"><img src="https://i.pinimg.com/736x/26/a2/85/26a2857a33ac96048936429b907be8ba.jpg" style="width: 40px; height: 40px; margin-right: 10px;"></a>
+
+    <a href="https://twitter.com/"><img src="https://www.pinkvilla.com/imageresize/twitters_blue_subscription_service_will_let_you_undo_tweets_and_allow_more_customizable_and_seamless_experience.png?width=752&t=pvorg" style="width: 30px; height: 30px; margin-left: 10px;"></a>  
+  
+    <a href="https://twitter.com/"><img src="data:image/png;base64,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" style="width: 45px; height: 35px; margin-left: 10px;"></a>
+  
+    <h5 class="end">Thats all for today..!!!</h5>
+</div>
+</ion-footer>
+</center>
+
+</ion-content>
+
